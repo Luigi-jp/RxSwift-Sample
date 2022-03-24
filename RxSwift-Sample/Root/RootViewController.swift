@@ -16,11 +16,16 @@ class RootViewController: UIViewController {
     }
 
     @IBOutlet private weak var incrementalSearchButton: UIButton!
-
+    @IBOutlet private weak var signupButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         incrementalSearchButton.rx.tap.subscribe(onNext: {
             Router.shared.showIncrementalSearch(from: self)
+        }).disposed(by: rx.disposeBag)
+
+        signupButton.rx.tap.subscribe(onNext: {
+            Router.shared.showSignup(from: self)
         }).disposed(by: rx.disposeBag)
     }
 }

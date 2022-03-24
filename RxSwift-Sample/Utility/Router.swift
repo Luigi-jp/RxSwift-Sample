@@ -24,6 +24,11 @@ class Router {
         let vc = IncrementalSearchViewController.makeFromStoryboard()
         show(from: from, to: vc)
     }
+
+    func showSignup(from: UIViewController) {
+        let vc = SignupViewController.makeFromStoryboard()
+        show(from: from, to: vc)
+    }
 }
 
 private extension Router {

@@ -15,4 +15,8 @@ extension UIStoryboard {
     static var incrementalSearchViewController: IncrementalSearchViewController {
         UIStoryboard.init(name: "IncrementalSearch", bundle: nil).instantiateInitialViewController() as! IncrementalSearchViewController
     }
+
+    static var signupViewController: SignupViewController {
+        UIStoryboard.init(name: "Signup", bundle: nil).instantiateInitialViewController() as! SignupViewController
+    }
 }
