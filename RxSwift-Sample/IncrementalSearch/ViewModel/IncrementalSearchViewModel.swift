@@ -10,20 +10,20 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol ViewModelInput {
+protocol IncrementalSearchViewModelInput {
     // Observer：イベント処理
     // イベントを受け付けるのみ？
     var searchTextObserver: AnyObserver<String> { get }
 }
 
-protocol ViewModelOutput {
+protocol IncrementalSearchViewModelOutput {
     // Observable：イベント発生元
     // イベントを渡すのみ？
     var changeModelObservable: Observable<Void> { get }
     var models: [GithubModel] { get }
 }
 
-final class ViewModel: ViewModelInput, ViewModelOutput, HasDisposeBag {
+final class IncrementalSearchViewModel: IncrementalSearchViewModelInput, IncrementalSearchViewModelOutput, HasDisposeBag {
     
 
     // PublishRelay：イベントの検知と発生の両方ができるクラス

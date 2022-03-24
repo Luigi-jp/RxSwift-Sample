@@ -12,7 +12,7 @@ import Alamofire
 final class GithubAPI {
     static let shared: GithubAPI = GithubAPI()
     private init() {}
-    
+
     func get(searchWord: String, success: (([GithubModel]) -> Void)? = nil, failure: ((Error) -> Void)? = nil) {
         guard searchWord.count > 0 else {
             success?([])
