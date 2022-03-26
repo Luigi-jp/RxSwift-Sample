@@ -30,7 +30,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザー名が不正です" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJq-6U-Go1">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザー名は6文字以上で入力してください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJq-6U-Go1">
                                                 <rect key="frame" x="0.0" y="55" width="314" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" systemColor="systemRedColor"/>
@@ -104,8 +104,8 @@
                         <outlet property="passwordTextField" destination="avr-Ju-mqd" id="eL0-aW-5mn"/>
                         <outlet property="passwordValidationLabel" destination="jtT-8m-dDP" id="bOT-Rn-fat"/>
                         <outlet property="signupButton" destination="XS5-cU-ssn" id="HHy-sO-nKZ"/>
-                        <outlet property="userNameTextField" destination="mMT-ex-C0p" id="LYn-C9-JBF"/>
-                        <outlet property="userNameValidationLabel" destination="BJq-6U-Go1" id="aiT-q3-i8A"/>
+                        <outlet property="usernameTextField" destination="mMT-ex-C0p" id="LYn-C9-JBF"/>
+                        <outlet property="usernameValidationLabel" destination="BJq-6U-Go1" id="aiT-q3-i8A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

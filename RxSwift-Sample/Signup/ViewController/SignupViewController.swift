@@ -6,22 +6,44 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxOptional
 
-class SignupViewController: UIViewController {
+final class SignupViewController: UIViewController {
     static func makeFromStoryboard() -> SignupViewController {
         let vc = UIStoryboard.signupViewController
         return vc
     }
 
-    @IBOutlet private weak var userNameTextField: UITextField!
-    @IBOutlet private weak var userNameValidationLabel: UILabel!
+    @IBOutlet private weak var usernameTextField: UITextField!
+    @IBOutlet private weak var usernameValidationLabel: UILabel!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var passwordValidationLabel: UILabel!
     @IBOutlet private weak var passwordConfirmTextField: UITextField!
     @IBOutlet private weak var passwordConfirmValidationLabel: UILabel!
     @IBOutlet private weak var signupButton: UIButton!
+    
+    private let viewModel = SignupViewModel()
+    private lazy var input: SignupViewModelInput = viewModel
+    private lazy var output: SignupViewModelOutput = viewModel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindInputStream()
+        bindOutputStream()
+    }
+
+    private func bindInputStream() {
+        let usernameObservable = usernameTextField.rx.text.asObservable()
+            .filterNil()
+            .filter{ $0.isNotEmpty }
+        usernameObservable.bind(to: input.usernameObserver).disposed(by: rx.disposeBag)
+    }
+
+    private func bindOutputStream() {
+        output.usernameValidateObservable.subscribe(onNext: { valid in
+            self.usernameValidationLabel.isHidden = valid
+        }).disposed(by: rx.disposeBag)
     }
 }
