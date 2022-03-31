@@ -37,27 +37,24 @@ final class SignupViewController: UIViewController {
     private func bindInputStream() {
         let usernameObservable = usernameTextField.rx.text.asObservable()
             .filterNil()
-            .filter{ $0.isNotEmpty }
         usernameObservable.bind(to: input.usernameObserver).disposed(by: rx.disposeBag)
         let passwordObservable = passwordTextField.rx.text.asObservable()
             .filterNil()
-            .filter{ $0.isNotEmpty }
         passwordObservable.bind(to: input.passwordObserver).disposed(by: rx.disposeBag)
         let passwordConfirmObservable = passwordConfirmTextField.rx.text.asObservable()
             .filterNil()
-            .filter{ $0.isNotEmpty }
         passwordConfirmObservable.bind(to: input.passwordConfirmObserver).disposed(by: rx.disposeBag)
     }
 
     private func bindOutputStream() {
-        output.usernameValidateObservable.subscribe(onNext: { valid in
-            self.usernameValidationLabel.isHidden = valid
+        output.usernameValidateObservable.subscribe(onNext: { validationResult in
+            self.usernameValidationLabel.text = validationResult.validationText
         }).disposed(by: rx.disposeBag)
-        output.passwordValidateObservable.subscribe(onNext: { valid in
-            self.passwordValidationLabel.isHidden = valid
+        output.passwordValidateObservable.subscribe(onNext: { validationResult in
+            self.passwordValidationLabel.text = validationResult.validationText
         }).disposed(by: rx.disposeBag)
-        output.passwordConfirmValidateObservable.subscribe(onNext: { valid in
-            self.passwordConfirmValidationLabel.isHidden = valid
+        output.passwordConfirmValidateObservable.subscribe(onNext: { validationResult in
+            self.passwordConfirmValidationLabel.text = validationResult.validationText
         }).disposed(by: rx.disposeBag)
     }
 }

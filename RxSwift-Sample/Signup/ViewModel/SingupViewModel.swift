@@ -10,6 +10,36 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
+enum ValidationResult {
+    case ok
+    case empty
+    case usernameFailed
+    case passwordFailed
+    case passwordConfirmFailed
+
+    var isValid: Bool {
+        switch self {
+        case .ok:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var validationText: String {
+        switch self {
+        case .usernameFailed:
+            return "ユーザー名は6文字以上で入力してください"
+        case .passwordFailed:
+            return "パスワードは8文字以上で入力してください"
+        case .passwordConfirmFailed:
+            return "パスワードが一致しません。"
+        default:
+            return ""
+        }
+    }
+}
+
 protocol SignupViewModelInput {
     var usernameObserver: AnyObserver<String> { get }
     var passwordObserver: AnyObserver<String> { get }
@@ -17,9 +47,9 @@ protocol SignupViewModelInput {
 }
 
 protocol SignupViewModelOutput {
-    var usernameValidateObservable: Observable<Bool> { get }
-    var passwordValidateObservable: Observable<Bool> { get }
-    var passwordConfirmValidateObservable: Observable<Bool> { get }
+    var usernameValidateObservable: Observable<ValidationResult> { get }
+    var passwordValidateObservable: Observable<ValidationResult> { get }
+    var passwordConfirmValidateObservable: Observable<ValidationResult> { get }
 }
 
 final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDisposeBag {
@@ -39,15 +69,15 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
         self.passwordConfirmRelay.accept(e)
     }
 
-    private let usernameValidateRelay = BehaviorRelay<Bool>(value: true)
-    lazy var usernameValidateObservable: Observable<Bool> = usernameValidateRelay.asObservable()
-    private let passwordValidateRelay = BehaviorRelay<Bool>(value: true)
-    lazy var passwordValidateObservable: Observable<Bool> = passwordValidateRelay.asObservable()
-    private let passwordConfirmValidateRelay = BehaviorRelay<Bool>(value: true)
-    lazy var passwordConfirmValidateObservable: Observable<Bool> = passwordConfirmValidateRelay.asObservable()
+    private let usernameValidateRelay = BehaviorRelay<ValidationResult>(value: .empty)
+    lazy var usernameValidateObservable: Observable<ValidationResult> = usernameValidateRelay.asObservable()
+    private let passwordValidateRelay = BehaviorRelay<ValidationResult>(value: .empty)
+    lazy var passwordValidateObservable: Observable<ValidationResult> = passwordValidateRelay.asObservable()
+    private let passwordConfirmValidateRelay = BehaviorRelay<ValidationResult>(value: .empty)
+    lazy var passwordConfirmValidateObservable: Observable<ValidationResult> = passwordConfirmValidateRelay.asObservable()
 
     init() {
-        usernameRelay.subscribe(onNext: { username in
+       usernameRelay.subscribe(onNext: { username in
             self.usernameValidate(username: username)
                 .bind(to: self.usernameValidateRelay)
                 .disposed(by: self.disposeBag)
@@ -58,30 +88,50 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
                 .disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
         Observable.combineLatest(passwordRelay, passwordConfirmRelay)
-            .flatMapLatest { (password, confirm) -> Observable<Bool> in
+            .flatMapLatest { (password, confirm) -> Observable<ValidationResult> in
                 self.passwordConfirmValidate(password: password, confirm: confirm)
             }
             .bind(to: passwordConfirmValidateRelay)
             .disposed(by: disposeBag)
     }
     
-    func usernameValidate(username: String) -> Observable<Bool> {
+    func usernameValidate(username: String) -> Observable<ValidationResult> {
       return Observable.create { observer in
-          observer.on(.next(username.count > 5))
+          let numberOfCharacters = username.count
+          if numberOfCharacters == 0 {
+              observer.on(.next(.empty))
+          } else if numberOfCharacters > 5 {
+              observer.on(.next(.ok))
+          } else {
+              observer.on(.next(.usernameFailed))
+          }
           return Disposables.create()
       }.share(replay: 1, scope: .whileConnected)
     }
 
-    func passwordValidate(password: String) -> Observable<Bool> {
+    func passwordValidate(password: String) -> Observable<ValidationResult> {
       return Observable.create { observer in
-          observer.on(.next(password.count > 7))
+          let numberOfCharacters = password.count
+          if numberOfCharacters == 0 {
+              observer.on(.next(.empty))
+          } else if numberOfCharacters > 7 {
+              observer.on(.next(.ok))
+          } else {
+              observer.on(.next(.passwordFailed))
+          }
           return Disposables.create()
       }.share(replay: 1, scope: .whileConnected)
     }
 
-    func passwordConfirmValidate(password: String, confirm: String) -> Observable<Bool> {
+    func passwordConfirmValidate(password: String, confirm: String) -> Observable<ValidationResult> {
       return Observable.create { observer in
-          observer.on(.next(password == confirm))
+          if confirm.count == 0 {
+              observer.on(.next(.empty))
+          } else if password == confirm {
+              observer.on(.next(.ok))
+          } else {
+              observer.on(.next(.passwordConfirmFailed))
+          }
           return Disposables.create()
       }.share(replay: 1, scope: .whileConnected)
     }
