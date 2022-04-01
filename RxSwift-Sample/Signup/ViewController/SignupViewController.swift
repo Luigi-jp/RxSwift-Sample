@@ -56,5 +56,9 @@ final class SignupViewController: UIViewController {
         output.passwordConfirmValidateObservable.subscribe(onNext: { validationResult in
             self.passwordConfirmValidationLabel.text = validationResult.validationText
         }).disposed(by: rx.disposeBag)
+        output.signupEnabledObservable.subscribe(onNext: { valid in
+            self.signupButton.isEnabled = valid
+            self.signupButton.alpha = valid ? 1.0 : 0.5
+        }).disposed(by: rx.disposeBag)
     }
 }

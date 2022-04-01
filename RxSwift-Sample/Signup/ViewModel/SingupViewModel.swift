@@ -50,6 +50,7 @@ protocol SignupViewModelOutput {
     var usernameValidateObservable: Observable<ValidationResult> { get }
     var passwordValidateObservable: Observable<ValidationResult> { get }
     var passwordConfirmValidateObservable: Observable<ValidationResult> { get }
+    var signupEnabledObservable: Observable<Bool> { get }
 }
 
 final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDisposeBag {
@@ -75,6 +76,8 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
     lazy var passwordValidateObservable: Observable<ValidationResult> = passwordValidateRelay.asObservable()
     private let passwordConfirmValidateRelay = BehaviorRelay<ValidationResult>(value: .empty)
     lazy var passwordConfirmValidateObservable: Observable<ValidationResult> = passwordConfirmValidateRelay.asObservable()
+    private let signupEnabledRelay = BehaviorRelay<Bool>(value: false)
+    lazy var signupEnabledObservable: Observable<Bool> = signupEnabledRelay.asObservable()
 
     init() {
        usernameRelay.subscribe(onNext: { username in
@@ -82,19 +85,36 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
                 .bind(to: self.usernameValidateRelay)
                 .disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
+
         passwordRelay.subscribe(onNext: { password in
             self.passwordValidate(password: password)
                 .bind(to: self.passwordValidateRelay)
                 .disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
+
         Observable.combineLatest(passwordRelay, passwordConfirmRelay)
             .flatMapLatest { (password, confirm) -> Observable<ValidationResult> in
                 self.passwordConfirmValidate(password: password, confirm: confirm)
             }
             .bind(to: passwordConfirmValidateRelay)
             .disposed(by: disposeBag)
+
+        Observable.combineLatest(
+            usernameValidateObservable,
+            passwordValidateObservable,
+            passwordConfirmValidateObservable
+        ) { username, password, confirmPassword in
+            username.isValid &&
+            password.isValid &&
+            confirmPassword.isValid
+        }
+        .share(replay: 1, scope: .whileConnected)
+        .bind(to: signupEnabledRelay)
+        .disposed(by: disposeBag)
     }
-    
+}
+
+private extension SignupViewModel {
     func usernameValidate(username: String) -> Observable<ValidationResult> {
       return Observable.create { observer in
           let numberOfCharacters = username.count
@@ -135,6 +155,4 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
           return Disposables.create()
       }.share(replay: 1, scope: .whileConnected)
     }
-    
 }
-
