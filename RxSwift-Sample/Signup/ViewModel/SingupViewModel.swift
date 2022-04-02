@@ -44,6 +44,7 @@ protocol SignupViewModelInput {
     var usernameObserver: AnyObserver<String> { get }
     var passwordObserver: AnyObserver<String> { get }
     var passwordConfirmObserver: AnyObserver<String> { get }
+    var signedupObserver: AnyObserver<Void> { get }
 }
 
 protocol SignupViewModelOutput {
@@ -51,6 +52,7 @@ protocol SignupViewModelOutput {
     var passwordValidateObservable: Observable<ValidationResult> { get }
     var passwordConfirmValidateObservable: Observable<ValidationResult> { get }
     var signupEnabledObservable: Observable<Bool> { get }
+    var signedupResultObservable: Observable<Bool> { get }
 }
 
 final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDisposeBag {
@@ -69,6 +71,11 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
         guard let e = event.element else { return }
         self.passwordConfirmRelay.accept(e)
     }
+    private let signedupRelay = PublishRelay<Void>()
+    lazy var signedupObserver: AnyObserver<Void> = .init { event in
+        guard let e = event.element else { return }
+        self.signedupRelay.accept(e)
+    }
 
     private let usernameValidateRelay = BehaviorRelay<ValidationResult>(value: .empty)
     lazy var usernameValidateObservable: Observable<ValidationResult> = usernameValidateRelay.asObservable()
@@ -78,6 +85,8 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
     lazy var passwordConfirmValidateObservable: Observable<ValidationResult> = passwordConfirmValidateRelay.asObservable()
     private let signupEnabledRelay = BehaviorRelay<Bool>(value: false)
     lazy var signupEnabledObservable: Observable<Bool> = signupEnabledRelay.asObservable()
+    private let signedupResultRelay = PublishRelay<Bool>()
+    lazy var signedupResultObservable: Observable<Bool> = signedupResultRelay.asObservable()
 
     init() {
        usernameRelay.subscribe(onNext: { username in
@@ -110,6 +119,15 @@ final class SignupViewModel: SignupViewModelInput, SignupViewModelOutput, HasDis
         }
         .share(replay: 1, scope: .whileConnected)
         .bind(to: signupEnabledRelay)
+        .disposed(by: disposeBag)
+
+        let usernameAndPassword = Observable.combineLatest(usernameRelay, passwordRelay) { (username: $0, password: $1) }
+        signedupRelay.withLatestFrom(usernameAndPassword)
+            .flatMapLatest { pair -> Observable<Bool> in
+                self.signup(pair.username, password: pair.password)
+        }
+        .share(replay: 1, scope: .whileConnected)
+        .bind(to: signedupResultRelay)
         .disposed(by: disposeBag)
     }
 }
@@ -154,5 +172,10 @@ private extension SignupViewModel {
           }
           return Disposables.create()
       }.share(replay: 1, scope: .whileConnected)
+    }
+
+    func signup(_ username: String, password: String) -> Observable<Bool> {
+        let signupResult = arc4random() % 5 == 0 ? false : true
+        return Observable.just(signupResult).delay(.seconds(1), scheduler: MainScheduler.instance)
     }
 }

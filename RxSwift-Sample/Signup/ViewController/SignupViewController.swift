@@ -44,6 +44,8 @@ final class SignupViewController: UIViewController {
         let passwordConfirmObservable = passwordConfirmTextField.rx.text.asObservable()
             .filterNil()
         passwordConfirmObservable.bind(to: input.passwordConfirmObserver).disposed(by: rx.disposeBag)
+        let signedupObservable = signupButton.rx.tap.asObservable()
+        signedupObservable.bind(to: input.signedupObserver).disposed(by: rx.disposeBag)
     }
 
     private func bindOutputStream() {
@@ -59,6 +61,12 @@ final class SignupViewController: UIViewController {
         output.signupEnabledObservable.subscribe(onNext: { valid in
             self.signupButton.isEnabled = valid
             self.signupButton.alpha = valid ? 1.0 : 0.5
+        }).disposed(by: rx.disposeBag)
+        output.signedupResultObservable.subscribe(onNext: { signedup in
+            let message = signedup ? "サインイン成功" : "サインイン失敗"
+            let alert = UIAlertController(title: "サインイン結果", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
         }).disposed(by: rx.disposeBag)
     }
 }
