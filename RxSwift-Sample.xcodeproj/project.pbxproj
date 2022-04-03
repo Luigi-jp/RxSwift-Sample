@@ -14,6 +14,8 @@
 		2AD3FECD27ECC2EA008EE6BA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FECC27ECC2EA008EE6BA /* SignupViewController.swift */; };
 		2AD3FECF27ECC2F1008EE6BA /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3FECE27ECC2F1008EE6BA /* Signup.storyboard */; };
 		2AD3FED227ECC319008EE6BA /* SingupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FED127ECC319008EE6BA /* SingupViewModel.swift */; };
+		2AD3FED527F9E729008EE6BA /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FED427F9E729008EE6BA /* GreetingViewController.swift */; };
+		2AD3FED727F9E731008EE6BA /* Greeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3FED627F9E731008EE6BA /* Greeting.storyboard */; };
 		2AE301CA27DDBB61007A1AAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE301C927DDBB61007A1AAA /* AppDelegate.swift */; };
 		2AE301CC27DDBB61007A1AAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE301CB27DDBB61007A1AAA /* SceneDelegate.swift */; };
 		2AE301CE27DDBB61007A1AAA /* IncrementalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE301CD27DDBB61007A1AAA /* IncrementalSearchViewController.swift */; };
@@ -58,6 +60,8 @@
 		2AD3FECC27ECC2EA008EE6BA /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		2AD3FECE27ECC2F1008EE6BA /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		2AD3FED127ECC319008EE6BA /* SingupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingupViewModel.swift; sourceTree = "<group>"; };
+		2AD3FED427F9E729008EE6BA /* GreetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
+		2AD3FED627F9E731008EE6BA /* Greeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Greeting.storyboard; sourceTree = "<group>"; };
 		2AE301C627DDBB61007A1AAA /* RxSwift-Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE301C927DDBB61007A1AAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AE301CB27DDBB61007A1AAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		2AD3FED327F9E713008EE6BA /* Greeting */ = {
+			isa = PBXGroup;
+			children = (
+				2AD3FED427F9E729008EE6BA /* GreetingViewController.swift */,
+				2AD3FED627F9E731008EE6BA /* Greeting.storyboard */,
+			);
+			path = Greeting;
+			sourceTree = "<group>";
+		};
 		2AE301BD27DDBB61007A1AAA = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +249,7 @@
 				2AD3FEC027EC9979008EE6BA /* Root */,
 				2AD3FEC527EC9A2B008EE6BA /* IncrementalSearch */,
 				2AD3FECA27ECC29C008EE6BA /* Signup */,
+				2AD3FED327F9E713008EE6BA /* Greeting */,
 				2AD3FEC327EC9A02008EE6BA /* Utility */,
 				2AD3FEC427EC9A13008EE6BA /* Extensions */,
 				2AE301D227DDBB62007A1AAA /* Assets.xcassets */,
@@ -404,6 +418,7 @@
 				2AE301D627DDBB62007A1AAA /* LaunchScreen.storyboard in Resources */,
 				2AE3020727DDE13C007A1AAA /* IncrementalSearchTableViewCell.xib in Resources */,
 				2AE301D327DDBB62007A1AAA /* Assets.xcassets in Resources */,
+				2AD3FED727F9E731008EE6BA /* Greeting.storyboard in Resources */,
 				2AD3FECF27ECC2F1008EE6BA /* Signup.storyboard in Resources */,
 				2AE301D127DDBB61007A1AAA /* IncrementalSearch.storyboard in Resources */,
 			);
@@ -537,6 +552,7 @@
 				2AE301CE27DDBB61007A1AAA /* IncrementalSearchViewController.swift in Sources */,
 				2AD3FED227ECC319008EE6BA /* SingupViewModel.swift in Sources */,
 				2AD3FECD27ECC2EA008EE6BA /* SignupViewController.swift in Sources */,
+				2AD3FED527F9E729008EE6BA /* GreetingViewController.swift in Sources */,
 				2AE3020327DDD407007A1AAA /* GithubAPI.swift in Sources */,
 				2AE3020027DDD288007A1AAA /* GithubModel.swift in Sources */,
 				2AE301CA27DDBB61007A1AAA /* AppDelegate.swift in Sources */,

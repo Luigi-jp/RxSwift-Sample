@@ -29,6 +29,11 @@ class Router {
         let vc = SignupViewController.makeFromStoryboard()
         show(from: from, to: vc)
     }
+
+    func showGreeting(from: UIViewController) {
+        let vc = GreetingViewController.makeFromStoryboard()
+        show(from: from, to: vc)
+    }
 }
 
 private extension Router {

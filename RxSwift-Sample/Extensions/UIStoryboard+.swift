@@ -19,4 +19,8 @@ extension UIStoryboard {
     static var signupViewController: SignupViewController {
         UIStoryboard.init(name: "Signup", bundle: nil).instantiateInitialViewController() as! SignupViewController
     }
+
+    static var greetingViewController: GreetingViewController {
+        UIStoryboard.init(name: "Greeting", bundle: nil).instantiateInitialViewController() as! GreetingViewController
+    }
 }
