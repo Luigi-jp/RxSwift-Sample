@@ -18,6 +18,11 @@
 		2AD3FED727F9E731008EE6BA /* Greeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3FED627F9E731008EE6BA /* Greeting.storyboard */; };
 		2AD3FEDA27FB2D4B008EE6BA /* RxDataSources.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3FED927FB2D4B008EE6BA /* RxDataSources.storyboard */; };
 		2AD3FEDC27FB2D5D008EE6BA /* RxDataSourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FEDB27FB2D5D008EE6BA /* RxDataSourcesViewController.swift */; };
+		2AD3FEE027FB3112008EE6BA /* RxDataSourcesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FEDF27FB3112008EE6BA /* RxDataSourcesModel.swift */; };
+		2AD3FEE927FB32DB008EE6BA /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FEE727FB32DB008EE6BA /* TableViewCell.swift */; };
+		2AD3FEEA27FB32DB008EE6BA /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3FEE827FB32DB008EE6BA /* TableViewCell.xib */; };
+		2AD3FEEC27FB3395008EE6BA /* RxDataSourcesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FEEB27FB3395008EE6BA /* RxDataSourcesPresenter.swift */; };
+		2AD3FEEE27FB40C3008EE6BA /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3FEED27FB40C3008EE6BA /* UIImageView+.swift */; };
 		2AE301CA27DDBB61007A1AAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE301C927DDBB61007A1AAA /* AppDelegate.swift */; };
 		2AE301CC27DDBB61007A1AAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE301CB27DDBB61007A1AAA /* SceneDelegate.swift */; };
 		2AE301CE27DDBB61007A1AAA /* IncrementalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE301CD27DDBB61007A1AAA /* IncrementalSearchViewController.swift */; };
@@ -66,6 +71,11 @@
 		2AD3FED627F9E731008EE6BA /* Greeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Greeting.storyboard; sourceTree = "<group>"; };
 		2AD3FED927FB2D4B008EE6BA /* RxDataSources.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RxDataSources.storyboard; sourceTree = "<group>"; };
 		2AD3FEDB27FB2D5D008EE6BA /* RxDataSourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourcesViewController.swift; sourceTree = "<group>"; };
+		2AD3FEDF27FB3112008EE6BA /* RxDataSourcesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourcesModel.swift; sourceTree = "<group>"; };
+		2AD3FEE727FB32DB008EE6BA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		2AD3FEE827FB32DB008EE6BA /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		2AD3FEEB27FB3395008EE6BA /* RxDataSourcesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourcesPresenter.swift; sourceTree = "<group>"; };
+		2AD3FEED27FB40C3008EE6BA /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		2AE301C627DDBB61007A1AAA /* RxSwift-Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE301C927DDBB61007A1AAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AE301CB27DDBB61007A1AAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				2AD3FEBE27EC951A008EE6BA /* UIStoryboard+.swift */,
+				2AD3FEED27FB40C3008EE6BA /* UIImageView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,18 +237,46 @@
 		2AD3FED827FB2A60008EE6BA /* RxDataSources */ = {
 			isa = PBXGroup;
 			children = (
-				2AD3FEDD27FB2D79008EE6BA /* ViewController */,
+				2AD3FEE627FB32C8008EE6BA /* View */,
+				2AD3FEDE27FB3103008EE6BA /* Model */,
+				2AD3FEE427FB329D008EE6BA /* ViewController */,
+				2AD3FEE227FB3257008EE6BA /* Presenter */,
 			);
 			path = RxDataSources;
 			sourceTree = "<group>";
 		};
-		2AD3FEDD27FB2D79008EE6BA /* ViewController */ = {
+		2AD3FEDE27FB3103008EE6BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AD3FEDF27FB3112008EE6BA /* RxDataSourcesModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AD3FEE227FB3257008EE6BA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2AD3FEEB27FB3395008EE6BA /* RxDataSourcesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2AD3FEE427FB329D008EE6BA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				2AD3FED927FB2D4B008EE6BA /* RxDataSources.storyboard */,
 				2AD3FEDB27FB2D5D008EE6BA /* RxDataSourcesViewController.swift */,
 			);
-			name = ViewController;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AD3FEE627FB32C8008EE6BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AD3FEE727FB32DB008EE6BA /* TableViewCell.swift */,
+				2AD3FEE827FB32DB008EE6BA /* TableViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2AE301BD27DDBB61007A1AAA = {
@@ -440,6 +479,7 @@
 				2AE301D627DDBB62007A1AAA /* LaunchScreen.storyboard in Resources */,
 				2AE3020727DDE13C007A1AAA /* IncrementalSearchTableViewCell.xib in Resources */,
 				2AE301D327DDBB62007A1AAA /* Assets.xcassets in Resources */,
+				2AD3FEEA27FB32DB008EE6BA /* TableViewCell.xib in Resources */,
 				2AD3FEDA27FB2D4B008EE6BA /* RxDataSources.storyboard in Resources */,
 				2AD3FED727F9E731008EE6BA /* Greeting.storyboard in Resources */,
 				2AD3FECF27ECC2F1008EE6BA /* Signup.storyboard in Resources */,
@@ -571,12 +611,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AD3FEEE27FB40C3008EE6BA /* UIImageView+.swift in Sources */,
 				2AD3FEBF27EC951A008EE6BA /* UIStoryboard+.swift in Sources */,
+				2AD3FEE927FB32DB008EE6BA /* TableViewCell.swift in Sources */,
 				2AD3FEDC27FB2D5D008EE6BA /* RxDataSourcesViewController.swift in Sources */,
 				2AE301CE27DDBB61007A1AAA /* IncrementalSearchViewController.swift in Sources */,
 				2AD3FED227ECC319008EE6BA /* SingupViewModel.swift in Sources */,
 				2AD3FECD27ECC2EA008EE6BA /* SignupViewController.swift in Sources */,
 				2AD3FED527F9E729008EE6BA /* GreetingViewController.swift in Sources */,
+				2AD3FEE027FB3112008EE6BA /* RxDataSourcesModel.swift in Sources */,
 				2AE3020327DDD407007A1AAA /* GithubAPI.swift in Sources */,
 				2AE3020027DDD288007A1AAA /* GithubModel.swift in Sources */,
 				2AE301CA27DDBB61007A1AAA /* AppDelegate.swift in Sources */,
@@ -584,6 +627,7 @@
 				2AE301FC27DDBFA4007A1AAA /* IncrementalSearchViewModel.swift in Sources */,
 				2AE3020627DDE13C007A1AAA /* IncrementalSearchTableViewCell.swift in Sources */,
 				2AD3FEB927EC90C3008EE6BA /* RootViewController.swift in Sources */,
+				2AD3FEEC27FB3395008EE6BA /* RxDataSourcesPresenter.swift in Sources */,
 				2AE301CC27DDBB61007A1AAA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -3,6 +3,7 @@ PODS:
   - Differentiator (5.0.0)
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
+  - Nuke (10.7.1)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -20,6 +21,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - "NSObject+Rx"
+  - Nuke
   - RxCocoa
   - RxDataSources
   - RxOptional
@@ -30,6 +32,7 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - "NSObject+Rx"
+    - Nuke
     - RxCocoa
     - RxDataSources
     - RxOptional
@@ -40,12 +43,13 @@ SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
+  Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxOptional: 3664964c96b69dd20c9cf78bdfe546615e26eca8
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 511bf25fe9ba39c7f65c1804a9eac051075e2742
+PODFILE CHECKSUM: 2e9d035bc874e485e6b97c00c3aac1bc5c462084
 
 COCOAPODS: 1.11.2

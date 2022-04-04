@@ -13,6 +13,7 @@ target 'RxSwift-Sample' do
   pod 'RxDataSources'
   
   pod 'Alamofire'
+  pod 'Nuke'
 
   target 'RxSwift-SampleTests' do
     inherit! :search_paths
