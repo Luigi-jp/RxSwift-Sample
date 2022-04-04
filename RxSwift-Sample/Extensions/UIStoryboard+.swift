@@ -23,4 +23,8 @@ extension UIStoryboard {
     static var greetingViewController: GreetingViewController {
         UIStoryboard.init(name: "Greeting", bundle: nil).instantiateInitialViewController() as! GreetingViewController
     }
+
+    static var rxDataSourcesViewController: RxDataSourcesViewController {
+        UIStoryboard.init(name: "RxDataSources", bundle: nil).instantiateInitialViewController() as! RxDataSourcesViewController
+    }
 }

@@ -31,21 +31,29 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Greeting"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-7e-pEF">
+                                <rect key="frame" x="145.5" y="277" width="123" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="RxDataSources"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="REY-yh-evG" firstAttribute="top" secondItem="GbK-iV-Mj3" secondAttribute="bottom" constant="30" id="0sZ-kc-Hhf"/>
+                            <constraint firstItem="3Th-7e-pEF" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="8tn-pX-1Ed"/>
                             <constraint firstItem="8J5-V6-KMS" firstAttribute="top" secondItem="REY-yh-evG" secondAttribute="bottom" constant="30" id="JF1-Ut-evK"/>
                             <constraint firstItem="REY-yh-evG" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="XXk-br-XWz"/>
                             <constraint firstItem="GbK-iV-Mj3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="aqs-Tr-6kF"/>
                             <constraint firstItem="8J5-V6-KMS" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="b4O-m5-6SS"/>
                             <constraint firstItem="GbK-iV-Mj3" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="gqE-MC-SPd"/>
+                            <constraint firstItem="3Th-7e-pEF" firstAttribute="top" secondItem="8J5-V6-KMS" secondAttribute="bottom" constant="30" id="k7X-Zh-r8h"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="greetingButton" destination="8J5-V6-KMS" id="Ftn-DO-rvG"/>
                         <outlet property="incrementalSearchButton" destination="GbK-iV-Mj3" id="Dxi-dd-qxo"/>
+                        <outlet property="rxDataSourcesButton" destination="3Th-7e-pEF" id="MtP-GU-hf1"/>
                         <outlet property="signupButton" destination="REY-yh-evG" id="qha-8o-zuV"/>
                     </connections>
                 </viewController>

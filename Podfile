@@ -10,6 +10,7 @@ target 'RxSwift-Sample' do
   pod 'RxCocoa'
   pod 'RxOptional'
   pod 'NSObject+Rx'
+  pod 'RxDataSources'
   
   pod 'Alamofire'
 

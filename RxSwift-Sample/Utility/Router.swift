@@ -34,6 +34,11 @@ class Router {
         let vc = GreetingViewController.makeFromStoryboard()
         show(from: from, to: vc)
     }
+
+    func showRxDataSources(from: UIViewController) {
+        let vc = RxDataSourcesViewController.makeFromStoryboard()
+        show(from: from, to: vc)
+    }
 }
 
 private extension Router {
