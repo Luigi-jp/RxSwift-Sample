@@ -16,7 +16,8 @@ final class IncrementalSearchViewController: UIViewController {
         return vc
     }
 
-    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchTextField: UITextField!
+    @IBOutlet private weak var sortTypeSegmentControl: UISegmentedControl!
     @IBOutlet private weak var tableView: UITableView!
 
     private let viewModel = IncrementalSearchViewModel()
@@ -33,15 +34,21 @@ final class IncrementalSearchViewController: UIViewController {
     }
 
     private func bindInputStream() {
-        let searchTextObservable = searchBar.searchTextField.rx.text
+        let searchTextObservable = searchTextField.rx.text
             .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .filterNil()
             .filter { $0.isNotEmpty }
 
+        let sortTypeObservable = Observable.merge(
+            Observable.just(sortTypeSegmentControl.selectedSegmentIndex),
+            sortTypeSegmentControl.rx.controlEvent(.valueChanged).map { self.sortTypeSegmentControl.selectedSegmentIndex }
+        ).map { $0 == 0 }
+
         // input側のObserverにストリームを接続する（流す）
         // subscribeと同じ振る舞い
         searchTextObservable.bind(to: input.searchTextObserver).disposed(by: rx.disposeBag)
+        sortTypeObservable.bind(to: input.sortTypeObserver).disposed(by: rx.disposeBag)
     }
 
     private func bindOutputStream() {

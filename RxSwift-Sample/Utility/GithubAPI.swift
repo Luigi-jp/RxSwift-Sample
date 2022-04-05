@@ -13,12 +13,12 @@ final class GithubAPI {
     static let shared: GithubAPI = GithubAPI()
     private init() {}
 
-    func get(searchWord: String, success: (([GithubModel]) -> Void)? = nil, failure: ((Error) -> Void)? = nil) {
+    func get(searchWord: String, isDesc: Bool = true, success: (([GithubModel]) -> Void)? = nil, failure: ((Error) -> Void)? = nil) {
         guard searchWord.count > 0 else {
             success?([])
             return
         }
-        AF.request("https://api.github.com/search/repositories?q=\(searchWord)&sort=stars&order=desc").response { response in
+        AF.request("https://api.github.com/search/repositories?q=\(searchWord)&sort=stars&order=\(isDesc ? "desc" : "asc")").response { response in
             switch response.result {
             case .success:
                 guard let data = response.data,
@@ -38,9 +38,9 @@ final class GithubAPI {
 
 extension GithubAPI: ReactiveCompatible {}
 extension Reactive where Base: GithubAPI {
-    func get(searchWord: String) -> Observable<[GithubModel]> {
+    func get(searchWord: String, isDesc: Bool = true) -> Observable<[GithubModel]> {
       return Observable.create { observer in
-          GithubAPI.shared.get(searchWord: searchWord, success: { model in
+          GithubAPI.shared.get(searchWord: searchWord, isDesc: isDesc, success: { model in
               observer.on(.next(model))
           }, failure: { error in
               observer.on(.error(error))
